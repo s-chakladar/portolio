@@ -1,0 +1,394 @@
+:root {
+    --color-1: #F2545B; /* Lobster Pink (Accent) */
+    --color-2: #A93F55; /* Cherry Rose (Gradient End) */
+    --color-3: #19323C; /* Jet Black (30% Text & Borders) */
+    --color-4: #8C5E58; /* Smoky Rose (Secondary Text) */
+    --color-5: #F3F7F0; /* Mint Cream (60% Main Background) */
+
+    --bg-color: var(--color-5);
+    /* 60% rule: Mint Cream background flow */
+    --bg-gradient: linear-gradient(135deg, var(--color-5) 0%, #FFFFFF 100%);
+    
+    /* 30% rule: Jet Black structure for readability against the Mint Cream */
+    --text-color: var(--color-3); 
+    --text-muted: var(--color-4); 
+    --border-color: rgba(25, 50, 60, 0.15); /* Semi-transparent Jet Black for soft list boundaries */
+    
+    /* 10% rule: Vibrant gradient accent using Lobster Pink and Cherry Rose */
+    --accent: var(--color-1); 
+    --accent-gradient: linear-gradient(135deg, var(--color-1) 0%, var(--color-2) 100%);
+    
+    /* Transitions */
+    --surface: var(--color-3); /* Jet Black sliding loader */
+}
+
+/* Gradient Text utility */
+.gradient-text {
+    background: var(--accent-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent; /* Fallback for older browsers */
+    display: inline-block;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    cursor: none;
+}
+
+p, h1, h2, h3, li, span {
+    cursor: text; 
+}
+
+body {
+    background: var(--bg-gradient);
+    background-attachment: fixed;
+    color: var(--text-color);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* Custom Cursor */
+.cursor {
+    width: 6px;
+    height: 6px;
+    background-color: var(--accent); /* Lobster Pink */
+    border-radius: 50%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    mix-blend-mode: normal; 
+}
+
+.cursor-follower {
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--color-3); /* Jet Black outline */
+    border-radius: 50%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 9998;
+    transform: translate(-50%, -50%);
+    transition: width 0.3s, height 0.3s, background-color 0.3s, border-color 0.3s;
+}
+
+/* Loader */
+.loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--surface); /* Jet Black */
+    z-index: 10000;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    padding: 40px;
+}
+
+.loader-counter {
+    font-size: 10vw;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--color-5); /* Mint Cream on Jet Black! */
+}
+
+/* Typography & Layout */
+a {
+    color: var(--text-color);
+    text-decoration: none;
+    display: inline-block;
+}
+
+.section-container {
+    padding: 0 5vw;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Nav */
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    padding: 2vw 4vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+}
+
+.logo {
+    font-weight: 700;
+    font-size: 1.2rem;
+    letter-spacing: -0.02em;
+    color: var(--color-3); /* Jet Black logo */
+}
+
+.nav-links {
+    display: flex;
+    gap: 1.5vw;
+}
+
+.nav-links a {
+    font-size: 0.8rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    position: relative;
+    padding: 10px;
+    transition: color 0.3s;
+    color: var(--text-color);
+}
+
+.nav-links a:hover {
+    color: var(--accent); /* Lobster Pink */
+}
+
+/* Hero Section */
+.hero {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 4vw;
+}
+
+.hero-content {
+    margin-top: -5vh;
+}
+
+.hero-line {
+    overflow: hidden;
+}
+
+.hero-text {
+    line-height: 0.95;
+    letter-spacing: -0.04em;
+    transform: translateY(115%);
+    color: var(--text-color);
+}
+
+.hero-text span {
+    background: var(--accent-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}
+
+.scroll-indicator {
+    position: absolute;
+    bottom: 40px;
+    right: 4vw;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.scroll-indicator p {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+}
+
+.scroll-indicator .line {
+    width: 50px;
+    height: 1px;
+    background-color: var(--text-muted);
+}
+
+/* Titles */
+.section-title {
+    border-bottom: 1px solid var(--border-color); /* Faint Jet Black */
+    margin-bottom: 6vh;
+    padding-bottom: 2vh;
+}
+
+.section-title h2 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-muted); /* Smoky Rose */
+    letter-spacing: +0.05em;
+}
+
+/* About Section */
+.about {
+    padding: 10vh 0;
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+}
+
+.reveal-text {
+    font-size: 3vw;
+    font-weight: 400;
+    max-width: 95%;
+    line-height: 1.4;
+    color: var(--text-color);
+}
+
+/* Skills Grid */
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 4vh;
+    margin-top: 8vh;
+}
+
+.skill-category {
+    border-left: 2px solid var(--border-color); /* Jet Black */
+    padding-left: 20px;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.skill-category h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 1vh;
+    background: var(--accent-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}
+
+.skill-category p {
+    color: var(--text-color); /* Jet Black */
+    font-weight: 400;
+    line-height: 1.5;
+}
+
+
+/* Resume Section styling */
+.resume-section {
+    padding: 10vh 0;
+}
+
+.resume-list {
+    display: flex;
+    flex-direction: column;
+    gap: 7vh;
+}
+
+.resume-item {
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+.resume-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 0.5vh;
+    flex-wrap: wrap;
+}
+
+.resume-header h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.resume-header .date {
+    font-size: 0.9rem;
+    color: var(--accent); /* Lobster Pink */
+    letter-spacing: 0.05em;
+    font-weight: 500;
+}
+
+.resume-role {
+    font-size: 1.1rem;
+    color: var(--text-muted); /* Smoky Rose */
+    margin-bottom: 2.5vh;
+    font-style: italic;
+    font-weight: 400;
+}
+
+.resume-details {
+    list-style-type: none;
+    color: var(--text-color); 
+    font-weight: 400;
+}
+
+.resume-details li {
+    margin-bottom: 1.5vh;
+    position: relative;
+    padding-left: 25px;
+}
+
+.resume-details li::before {
+    content: "—";
+    position: absolute;
+    left: 0;
+    color: var(--accent); /* Lobster Pink */
+    font-size: 1rem;
+    line-height: inherit;
+    font-weight: 700;
+}
+
+
+/* Contact Section */
+.contact {
+    padding: 15vh 0 5vh;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.contact-title {
+    font-size: 10vw;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    margin-bottom: 5vh;
+    transform: translateY(50px);
+    opacity: 0;
+    color: var(--text-color);
+}
+
+.email-link {
+    font-size: 1.5rem;
+    border: 1px solid var(--border-color); /* Jet Black */
+    padding: 15px 40px;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+    display: inline-block;
+    color: var(--text-color);
+    background: transparent;
+}
+
+.email-link:hover {
+    background: var(--accent-gradient); /* Lobster Pink to Cherry Rose gradient */
+    color: #fff; /* White text */
+    border-color: transparent;
+    box-shadow: 0 5px 15px rgba(242, 84, 91, 0.4);
+}
+
+footer {
+    width: 100%;
+    margin-top: auto;
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    border-top: 1px solid var(--border-color);
+    padding-top: 30px;
+}
